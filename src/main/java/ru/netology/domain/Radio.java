@@ -2,14 +2,24 @@ package ru.netology.domain;
 
 
 public class Radio {
+    private int quantityStation = 10;
+    private int maxVolume = 100;
     private int currentStation;
     private int currentVolume;
+
+    public Radio(int quantityStation) {
+        this.quantityStation = quantityStation;
+    }
+
+    public Radio() {
+
+    }
 
     public void setCurrentStation(int currentStation) {
         if (currentStation < 0) {
             return;
         }
-        if (currentStation > 9) {
+        if (currentStation > quantityStation - 1) {
             return;
         }
         this.currentStation = currentStation;
@@ -23,7 +33,7 @@ public class Radio {
         if (currentVolume < 0) {
             return;
         }
-        if (currentVolume > 10) {
+        if (currentVolume > maxVolume) {
             return;
         }
         this.currentVolume = currentVolume;
@@ -36,7 +46,7 @@ public class Radio {
 
     public void setNextStation() {
 
-        if (currentStation < 9) {
+        if (currentStation < quantityStation - 1) {
             currentStation = currentStation + 1;
         } else {
             currentStation = 0;
@@ -51,43 +61,44 @@ public class Radio {
 
     public void setPrevStation() {
         if (currentStation == 0) {
-            currentStation = 9;
+            currentStation = quantityStation - 1;
         }
-        if (currentStation < 9) {
+        if (currentStation < quantityStation - 1) {
             currentStation = currentStation - 1;
         }
     }
 
     public int getPrevStation() {
+
         return currentStation;
     }
 
 
-    public int plusVolume;
-
     public void setPlusVolume() {
+        if (currentVolume == 0) {
+            return;
+        }
 
-        if (currentVolume < 10) {
+        if (currentVolume < maxVolume) {
             currentVolume = currentVolume + 1;
-        } else {
-            currentVolume = 0;
         }
     }
 
+
     public int getPlusVolume() {
+
         return currentVolume;
     }
 
-
-    public int minusVolume;
-
     public void setMinusVolume() {
         if (currentVolume == 0) {
-            currentVolume = 10;
+            return;
         }
-        if (currentVolume < 10) {
+        if (currentVolume <= maxVolume) {
             currentVolume = currentVolume - 1;
         }
+
+
     }
 
     public int getMinusVolume() {
@@ -95,4 +106,3 @@ public class Radio {
         return currentVolume;
     }
 }
-
